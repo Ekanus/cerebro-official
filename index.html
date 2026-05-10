@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Cerebro Software — AI Automation & Digital Solutions for businesses in Greece. Custom AI systems, websites, and software products.">
+  <title>Cerebro Software — AI Automation & Digital Solutions</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       PRELOADER — full-screen intro, first visit in session only
+  ═══════════════════════════════════════════════════════════════════════ -->
+  <div id="preloader" class="preloader" role="status" aria-label="Loading Cerebro Software">
+
+    <!-- Subtle scan-line background motion -->
+    <div class="preloader-scan" aria-hidden="true"></div>
+
+    <!-- Center composition -->
+    <div class="preloader-inner">
+      <div class="preloader-brand">
+        <p class="preloader-logo">CEREBRO</p>
+        <p class="preloader-tagline">AI Automation &amp; Digital Solutions</p>
+      </div>
+
+      <div class="preloader-progress-wrap">
+        <div class="preloader-progress">
+          <div class="preloader-track" aria-hidden="true">
+            <div class="preloader-fill" id="preloaderFill"></div>
+          </div>
+          <span class="preloader-pct" id="preloaderPct" aria-live="polite">00</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom details -->
+    <div class="preloader-foot" aria-hidden="true">
+      <span>Heraklion, Crete &mdash; Greece</span>
+      <span>cerebro.gr</span>
+    </div>
+
+  </div>
+
+  <!-- Custom cursor -->
+  <div id="cursor" class="cursor">
+    <div class="cursor-inner"></div>
+    <div class="cursor-outer"></div>
+  </div>
+
+  <!-- Navigation -->
+  <nav id="nav" class="nav">
+    <a href="#" class="nav-logo">CEREBRO</a>
+    <div class="nav-links">
+      <a href="#services" class="nav-link">Services</a>
+      <a href="#products" class="nav-link">Products</a>
+      <a href="#about"    class="nav-link">About</a>
+      <a href="#contact"  class="nav-link nav-link--cta">Contact</a>
+    </div>
+    <button class="nav-menu-btn" id="menuBtn" aria-label="Menu">
+      <span></span>
+      <span></span>
+    </button>
+  </nav>
+
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       HERO — 4 cinematic scenes, pinned scroll
+  ═══════════════════════════════════════════════════════════════════════ -->
+  <section id="hero" class="hero">
+
+    <canvas id="brainCanvas" class="brain-canvas"></canvas>
+
+    <!-- Fixed overline — sits above the brain, animated in by entrance TL -->
+    <div class="hero-overline" id="heroOverline" aria-hidden="true">AI Automation &amp; Digital Solutions</div>
+
+    <!-- Left vertical label -->
+    <div class="hero-side hero-side--left" aria-hidden="true">
+      <span>AI AUTOMATION · DIGITAL SOLUTIONS · SOFTWARE</span>
+    </div>
+
+
+    <!-- ── Scene 0: Centered, classical introduction ───────────────────── -->
+    <div class="hero-scene hero-scene--0">
+      <h1 class="hero-headline"><span class="hw">The</span> <span class="hw">brain</span> <span class="hw">behind</span> <span class="hw">smart</span><br><span class="hw">systems.</span></h1>
+      <div class="hero-meta">
+        <span>Heraklion, Crete</span>
+        <span aria-hidden="true">·</span>
+        <span>cerebro.gr</span>
+      </div>
+    </div>
+
+    <!-- ── Scene 1: Lower-left, asymmetric, brain shifts right ──────────── -->
+    <div class="hero-scene hero-scene--1">
+      <p class="hero-scene-eyebrow">Automation Intelligence</p>
+      <h1 class="hero-headline"><span class="hw">We</span> <span class="hw">automate</span><br><span class="hw">what</span> <span class="hw">slows</span><br><span class="hw">you</span> <span class="hw">down.</span></h1>
+    </div>
+
+    <!-- ── Scene 2: Wide center, largest headline, brain expands ─────────── -->
+    <div class="hero-scene hero-scene--2">
+      <h1 class="hero-headline"><span class="hw">AI</span> <span class="hw">systems</span> <span class="hw">for</span><br><span class="hw">real</span> <span class="hw">businesses.</span></h1>
+      <p class="hero-scene-sub">Built in Crete. Deployed across Greece.</p>
+    </div>
+
+    <!-- ── Scene 3: Brand ending, brain faded ───────────────────────────── -->
+    <div class="hero-scene hero-scene--3">
+      <h1 class="hero-headline hero-headline--brand"><span class="hw">CEREBRO</span><br><span class="hw">SOFTWARE.</span></h1>
+      <p class="hero-scene-url">cerebro.gr</p>
+    </div>
+
+    <!-- Right progress indicator (desktop only) -->
+    <div class="hero-progress" aria-hidden="true">
+      <div class="hero-progress-line"></div>
+      <span class="hero-progress-count" id="stageCounter">01 — 04</span>
+      <span class="hero-progress-scroll">Scroll</span>
+    </div>
+
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       HERO — MOBILE (shown below 768px only — normal scroll panels)
+  ═══════════════════════════════════════════════════════════════════════ -->
+  <section id="heroMobile" class="hero-mobile">
+    <canvas id="mobileBrainCanvas" class="mobile-brain-canvas" aria-hidden="true"></canvas>
+
+    <div class="hm-panel hm-panel--0">
+      <p class="hm-overline">AI Automation &amp; Digital Solutions</p>
+      <h1 class="hm-headline">
+        <span class="hw">The</span> <span class="hw">brain</span>
+        <span class="hw">behind</span> <span class="hw">smart</span><br>
+        <span class="hw">systems.</span>
+      </h1>
+      <div class="hm-meta">
+        <span>Heraklion, Crete</span>
+        <span aria-hidden="true">·</span>
+        <span>cerebro.gr</span>
+      </div>
+    </div>
+
+    <div class="hm-panel hm-panel--1">
+      <p class="hm-eyebrow">Automation Intelligence</p>
+      <h1 class="hm-headline">
+        <span class="hw">We</span> <span class="hw">automate</span><br>
+        <span class="hw">what</span> <span class="hw">slows</span><br>
+        <span class="hw">you</span> <span class="hw">down.</span>
+      </h1>
+    </div>
+
+    <div class="hm-panel hm-panel--2">
+      <h1 class="hm-headline">
+        <span class="hw">AI</span> <span class="hw">systems</span> <span class="hw">for</span><br>
+        <span class="hw">real</span> <span class="hw">businesses.</span>
+      </h1>
+    </div>
+
+    <div class="hm-panel hm-panel--3">
+      <h1 class="hm-headline hm-headline--brand">
+        <span class="hw">CEREBRO</span><br>
+        <span class="hw">SOFTWARE.</span>
+      </h1>
+      <p class="hm-url">cerebro.gr</p>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       MISSION
+  ═══════════════════════════════════════════════════════════════════════ -->
+  <section id="about" class="section section-mission">
+    <div class="container">
+      <div class="mission-grid">
+        <div class="mission-left">
+          <p class="mission-eyebrow">What we do</p>
+        </div>
+        <div class="mission-right">
+          <h2 class="mission-headline">We identify the problems<br>that cost you time and money.<br><em>Then we eliminate them.</em></h2>
+          <div class="mission-body">
+            <p>Cerebro Software builds custom AI automation systems and digital solutions for small and medium businesses across Greece. We don't sell templates. We engineer precision tools that run your operations while you focus on growth.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       SERVICES
+  ═══════════════════════════════════════════════════════════════════════ -->
+  <section id="services" class="section section-services">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-eyebrow">What we offer</p>
+        <h2 class="section-headline">Two directions.<br>One intelligence.</h2>
+      </div>
+
+      <div class="services-grid">
+        <div class="service-card">
+          <div class="service-card-index">01</div>
+          <h3 class="service-card-title">Digital Solutions</h3>
+          <p class="service-card-desc">Professional websites and digital presence for businesses that want to stand out and convert. Built with precision, not templates.</p>
+          <ul class="service-list">
+            <li>Custom website design &amp; development</li>
+            <li>Business digital presence</li>
+            <li>E-commerce &amp; booking systems</li>
+            <li>Brand identity &amp; visual systems</li>
+          </ul>
+          <a href="#contact" class="card-link">Start a project <span class="arrow">→</span></a>
+        </div>
+
+        <div class="service-card">
+          <div class="service-card-index">02</div>
+          <h3 class="service-card-title">AI Automation</h3>
+          <p class="service-card-desc">We map your workflows, find the bottlenecks, and build intelligent systems that run without you. Real automation, not chatbot demos.</p>
+          <ul class="service-list">
+            <li>Custom AI workflow automation</li>
+            <li>Email intelligence &amp; auto-response</li>
+            <li>Document processing &amp; recognition</li>
+            <li>AI voice &amp; chat agents</li>
+          </ul>
+          <a href="#contact" class="card-link">Explore automation <span class="arrow">→</span></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       PRODUCTS
+  ═══════════════════════════════════════════════════════════════════════ -->
+  <section id="products" class="section section-products">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-eyebrow">Software Products</p>
+        <h2 class="section-headline">Built for real operations.<br>Deployed in days.</h2>
+      </div>
+
+      <div class="products-grid">
+
+        <div class="product-card">
+          <div class="product-card-header">
+            <div class="product-tags">
+              <span class="product-version">v4.4</span>
+              <span class="product-tag">Hotels</span>
+              <span class="product-tag">Windows</span>
+            </div>
+          </div>
+          <h3 class="product-name">Invoice Sender</h3>
+          <p class="product-desc">Monitors your inbox, recognizes agency PDFs by keyword, and sends bulk invoices automatically through Outlook, Gmail, or any SMTP account.</p>
+          <ul class="product-features">
+            <li>Inbox monitoring &amp; PDF recognition</li>
+            <li>Bulk send via Outlook / Gmail / SMTP</li>
+            <li>Drag &amp; drop interface, dark mode</li>
+            <li>Excel export &amp; HWID licensing</li>
+            <li>Auto-update via GitHub</li>
+          </ul>
+          <div class="product-footer">
+            <div class="product-pricing">
+              <span class="price-amount">€250–400</span>
+              <span class="price-period">/year</span>
+            </div>
+            <a href="#contact" class="btn btn--outline">Request License</a>
+          </div>
+        </div>
+
+        <div class="product-card">
+          <div class="product-card-header">
+            <div class="product-tags">
+              <span class="product-version">v4.2</span>
+              <span class="product-tag">Hotels</span>
+              <span class="product-tag">Business</span>
+            </div>
+          </div>
+          <h3 class="product-name">Mail Responder</h3>
+          <p class="product-desc">AI-powered email intelligence trained on your business knowledge base. Reads, understands, and drafts precise replies in your voice — automatically or on suggestion.</p>
+          <ul class="product-features">
+            <li>Claude AI reply generation</li>
+            <li>Gmail + Outlook IMAP/SMTP support</li>
+            <li>Auto Mode &amp; Suggest Mode</li>
+            <li>Priority detection &amp; sentiment analysis</li>
+            <li>Weekly reports, multi-inbox, spam filtering</li>
+          </ul>
+          <div class="product-footer">
+            <div class="product-pricing">
+              <span class="price-amount">€150–200</span>
+              <span class="price-period">/month</span>
+              <span class="price-note">API included</span>
+            </div>
+            <a href="#contact" class="btn btn--outline">Request License</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       MEDICAL AUTOMATION
+  ═══════════════════════════════════════════════════════════════════════ -->
+  <section id="medical" class="section section-medical">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-eyebrow">Medical Clinics</p>
+        <h2 class="section-headline">AI that works<br>while you treat patients.</h2>
+        <p class="pricing-intro">Four automation tiers. From a booking page to a full 24/7 AI voice agent — choose your level and scale up any time.</p>
+      </div>
+
+      <div class="pricing-grid">
+
+        <div class="pricing-card">
+          <div class="pricing-tier">Starter</div>
+          <div class="pricing-price">
+            <span class="price-main">€40</span><span class="price-per">/mo</span>
+          </div>
+          <div class="pricing-setup">+ €150 setup</div>
+          <ul class="pricing-features">
+            <li>Online booking page</li>
+            <li>Google Business optimization</li>
+          </ul>
+          <a href="#contact" class="btn btn--outline btn--full">Get Started</a>
+        </div>
+
+        <div class="pricing-card">
+          <div class="pricing-tier">Essential</div>
+          <div class="pricing-price">
+            <span class="price-main">€80</span><span class="price-per">/mo</span>
+          </div>
+          <div class="pricing-setup">+ €250 setup</div>
+          <ul class="pricing-features">
+            <li>Online booking page</li>
+            <li>AI Chat Agent 24/7</li>
+            <li>Google Business optimization</li>
+          </ul>
+          <a href="#contact" class="btn btn--outline btn--full">Get Started</a>
+        </div>
+
+        <div class="pricing-card pricing-card--featured">
+          <div class="pricing-badge">Most Popular</div>
+          <div class="pricing-tier">Pro</div>
+          <div class="pricing-price">
+            <span class="price-main">€130</span><span class="price-per">/mo</span>
+          </div>
+          <div class="pricing-setup">+ €500 setup</div>
+          <ul class="pricing-features">
+            <li>Custom clinic website</li>
+            <li>AI Chat Agent 24/7</li>
+            <li>WhatsApp, Messenger, Viber, Instagram</li>
+            <li>Email automation</li>
+          </ul>
+          <a href="#contact" class="btn btn--white btn--full">Get Started</a>
+        </div>
+
+        <div class="pricing-card">
+          <div class="pricing-tier">Premium</div>
+          <div class="pricing-price">
+            <span class="price-main">€200</span><span class="price-per">/mo</span>
+          </div>
+          <div class="pricing-setup">+ €500 setup</div>
+          <ul class="pricing-features">
+            <li>Everything in Pro</li>
+            <li>AI Voice Agent 24/7</li>
+            <li>Full automation suite</li>
+          </ul>
+          <a href="#contact" class="btn btn--outline btn--full">Get Started</a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       WHY CEREBRO
+  ═══════════════════════════════════════════════════════════════════════ -->
+  <section class="section section-why">
+    <div class="container">
+      <div class="why-layout">
+        <h2 class="why-headline">Why<br>Cerebro?</h2>
+        <div class="why-grid">
+          <div class="why-item">
+            <div class="why-number">01</div>
+            <h3 class="why-title">We build, not consult.</h3>
+            <p class="why-text">Every solution is custom-engineered for your specific operation — not a template, not a plugin, not a SaaS subscription you didn't need.</p>
+          </div>
+          <div class="why-item">
+            <div class="why-number">02</div>
+            <h3 class="why-title">Greek market expertise.</h3>
+            <p class="why-text">Based in Heraklion, Crete. We understand the local business landscape, the language, and the real problems Greek SMBs face every day.</p>
+          </div>
+          <div class="why-item">
+            <div class="why-number">03</div>
+            <h3 class="why-title">AI that actually runs.</h3>
+            <p class="why-text">We deploy production-ready systems, not demos. Your automation is operational from day one, with licensing, updates, and support included.</p>
+          </div>
+          <div class="why-item">
+            <div class="why-number">04</div>
+            <h3 class="why-title">Transparent pricing.</h3>
+            <p class="why-text">No hidden fees. Clear packages with upfront costs, monthly rates, and everything documented before you sign anything.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       CONTACT
+  ═══════════════════════════════════════════════════════════════════════ -->
+  <section id="contact" class="section section-contact">
+    <div class="container">
+      <div class="contact-layout">
+
+        <div class="contact-info">
+          <p class="contact-eyebrow section-eyebrow">Get in touch</p>
+          <h2 class="contact-headline">Let's build<br>something intelligent.</h2>
+          <p class="contact-intro">Tell us about your business and the problem you want to solve. We'll respond within 24 hours.</p>
+          <div class="contact-direct">
+            <a href="mailto:info@cerebro.gr"
+               id="contactEmail"
+               class="contact-email"
+               data-copy-email="emailCopyMsg">info@cerebro.gr</a>
+            <span id="emailCopyMsg" class="copy-msg">Copied!</span>
+          </div>
+          <p class="contact-hint">Click to copy</p>
+        </div>
+
+        <form id="contactForm" class="contact-form" novalidate>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Name</label>
+              <input type="text"  class="form-input" name="name" placeholder="Your name" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Email</label>
+              <input type="email" class="form-input" name="email" placeholder="email@company.com" required>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Business type</label>
+            <select class="form-input form-select" name="businessType">
+              <option value="">Select your business</option>
+              <option value="hotel">Hotel / Tourism</option>
+              <option value="medical">Medical Clinic</option>
+              <option value="business">Other Business</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">What do you need?</label>
+            <textarea class="form-input form-textarea" name="message" placeholder="Describe your situation and what you'd like to automate or build..." required></textarea>
+          </div>
+          <button type="submit" class="btn btn--dark form-submit">Send Message →</button>
+        </form>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       FOOTER — Editorial, cinematic close
+  ═══════════════════════════════════════════════════════════════════════ -->
+  <footer class="footer">
+    <canvas id="footerClusterCanvas" aria-hidden="true"></canvas>
+
+    <!-- Opening statement -->
+    <div class="footer-statement">
+      <div class="container">
+        <h2 class="footer-statement-head">Let's build the system<br>your business is missing.</h2>
+        <a href="mailto:info@cerebro.gr"
+           class="footer-cta-link"
+           data-copy-email="footerCopyMsg">info@cerebro.gr
+          <span id="footerCopyMsg" class="copy-msg copy-msg--light">Copied!</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Divider -->
+    <div class="footer-divider" aria-hidden="true"></div>
+
+    <!-- Navigation columns -->
+    <div class="footer-body">
+      <div class="container">
+        <div class="footer-columns">
+
+          <div class="footer-col">
+            <div class="footer-col-label">Primary</div>
+            <a href="#services">Services</a>
+            <a href="#products">Products</a>
+            <a href="#medical">Medical Automation</a>
+            <a href="#contact">Contact</a>
+          </div>
+
+          <div class="footer-col">
+            <div class="footer-col-label">Go Deeper</div>
+            <a href="#about">About Cerebro</a>
+            <a href="#services">AI Automation</a>
+            <a href="#services">Digital Solutions</a>
+          </div>
+
+          <div class="footer-col">
+            <div class="footer-col-label">Products</div>
+            <a href="#products">Invoice Sender v4.4</a>
+            <a href="#products">Mail Responder v4.2</a>
+          </div>
+
+          <div class="footer-col">
+            <div class="footer-col-label">Start</div>
+            <a href="mailto:info@cerebro.gr" class="footer-email-link">info@cerebro.gr</a>
+          </div>
+
+        </div>
+
+        <!-- Credits line -->
+        <div class="footer-credits">
+          <span>Heraklion, Crete &mdash; Greece</span>
+          <span class="footer-sep" aria-hidden="true">/ / /</span>
+          <span>cerebro.gr</span>
+          <span class="footer-sep" aria-hidden="true">/ / /</span>
+          <span>&copy; 2026 Cerebro Software</span>
+          <span class="footer-sep" aria-hidden="true">/ / /</span>
+          <span>AI Automation &amp; Digital Solutions</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Large cropped wordmark -->
+    <div class="footer-wordmark-wrap" aria-hidden="true">
+      <div class="footer-wordmark">CEREBRO</div>
+    </div>
+
+  </footer>
+
+  <!-- Scripts — order matters: Three.js → GSAP → GSAP plugins → site modules -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/ScrollTrigger.min.js"></script>
+  <script src="js/preloader.js"></script>
+  <script src="js/brain.js"></script>
+  <script src="js/footer-cluster.js"></script>
+  <script src="js/cursor.js"></script>
+  <script src="js/main.js"></script>
+
+</body>
+</html>
