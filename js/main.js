@@ -128,66 +128,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // ── Mobile panel reveals + scroll-reactive brain ─────────────────────────
-  if (false && IS_MOBILE_INIT) {
-    const hmPanels = Array.from(document.querySelectorAll('.hm-panel'));
-
-    // Hidden initial state for all mobile panel content
-    hmPanels.forEach(panel => {
-      gsap.set(panel.querySelectorAll('.hw'), { opacity: 0, y: 16 });
-    });
-    gsap.set('.hm-overline', { opacity: 0, y: -8 });
-    gsap.set('.hm-meta',     { opacity: 0, y: 10 });
-
-    // Hidden initial state for eyebrows + url in panels 1-3
-    hmPanels.slice(1).forEach(panel => {
-      const eyebrow = panel.querySelector('.hm-eyebrow');
-      const url     = panel.querySelector('.hm-url');
-      if (eyebrow) gsap.set(eyebrow, { opacity: 0, y: 10 });
-      if (url)     gsap.set(url,     { opacity: 0, y: 10 });
-    });
-
-    // Reveal each panel as it scrolls into view — eyebrow before words
-    const panelObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (!entry.isIntersecting) return;
-        const eyebrow = entry.target.querySelector('.hm-eyebrow');
-        const words   = Array.from(entry.target.querySelectorAll('.hw'));
-        const url     = entry.target.querySelector('.hm-url');
-        const tl = gsap.timeline();
-        if (eyebrow) tl.to(eyebrow, { opacity: 1, y: 0, duration: 0.40, ease: 'power2.out' });
-        tl.to(words, { opacity: 1, y: 0, duration: 0.55, stagger: 0.09, ease: 'power2.out' },
-              eyebrow ? '-=0.22' : 0);
-        if (url) tl.to(url, { opacity: 0.70, y: 0, duration: 0.38, ease: 'power2.out' }, '-=0.18');
-        panelObserver.unobserve(entry.target);
-      });
-    }, { threshold: 0.22 });
-
-    hmPanels.slice(1).forEach(p => panelObserver.observe(p));
-
-    // Brain reacts to scroll through the mobile hero panels
-    const heroMobile = document.getElementById('heroMobile');
-    if (heroMobile) {
-      const syncBrain = () => {
-        const rect = heroMobile.getBoundingClientRect();
-        const scrollable = heroMobile.offsetHeight - window.innerHeight;
-        if (scrollable <= 0) return;
-        const progress = Math.min(1, Math.max(0, -rect.top / scrollable));
-        BrainScene.setScrollProgress(progress);
-      };
-      window.addEventListener('scroll', syncBrain, { passive: true });
-      syncBrain();
-
-      // Hide brain canvas when heroMobile section is fully past
-      const hideBrainOnExit = new IntersectionObserver((entries) => {
-        const mbc = document.getElementById('mobileBrainCanvas');
-        if (!mbc) return;
-        mbc.style.opacity = entries[0].isIntersecting ? '1' : '0';
-      }, { threshold: 0 });
-      hideBrainOnExit.observe(heroMobile);
-    }
-  }
-
   const nav = document.getElementById('nav');
   ScrollTrigger.create({
     start: 'top -70px',

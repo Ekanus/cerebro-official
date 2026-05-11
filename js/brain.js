@@ -289,15 +289,25 @@ const BrainScene = (() => {
     renderer.render(scene, camera);
   }
 
+  const MOBILE_STAGE_OFFSETS = [
+    { x: 0,    y: 0.06 },
+    { x: 0.10, y: 0.16 },
+    { x: 0,    y: 0.10 },
+    { x: 0,    y: 0    },
+  ];
+
   function setScrollProgress(p) {
     targetScroll = Math.min(1, Math.max(0, p));
     const stage  = p < 0.25 ? 0 : p < 0.50 ? 1 : p < 0.75 ? 2 : 3;
     const target = STAGE_TARGETS[stage];
-    // Desktop keeps the original staged movement.
-    // Mobile stays centered and slightly higher so it sits like the desktop composition,
-    // but never moves sideways out of the viewport.
-    targetGroupX = IS_MOBILE ? 0 : target.x;
-    targetGroupY = IS_MOBILE ? MOBILE_Y_OFFSET : target.y;
+    if (IS_MOBILE) {
+      const mTarget = MOBILE_STAGE_OFFSETS[stage];
+      targetGroupX = mTarget.x;
+      targetGroupY = mTarget.y;
+    } else {
+      targetGroupX = target.x;
+      targetGroupY = target.y;
+    }
   }
 
   function onResize() {
