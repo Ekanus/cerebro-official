@@ -18,9 +18,11 @@ const BrainScene = (() => {
   let _vHalfH = 0; // precomputed world-space half-height at z=0
 
   const IS_MOBILE = window.matchMedia('(max-width: 768px)').matches;
-  const PARTICLE_COUNT = IS_MOBILE ? 280 : 1000;
-  const MAX_CONNECTIONS = IS_MOBILE ? 500 : 3000;
-  const CONNECT_DIST = IS_MOBILE ? 0.38 : 0.45;
+  const PARTICLE_COUNT = IS_MOBILE ? 700 : 1000;
+  const MAX_CONNECTIONS = IS_MOBILE ? 1900 : 3000;
+  const CONNECT_DIST = IS_MOBILE ? 0.43 : 0.45;
+  const MOBILE_FIT_SCALE = 0.62;
+  const MOBILE_Y_OFFSET = 0.06;
 
   const STAGE_TARGETS = [
     { x: 0.00, y: 0.02 },
@@ -120,8 +122,8 @@ const BrainScene = (() => {
 
     const w = canvas.offsetWidth  || window.innerWidth;
     const h = canvas.offsetHeight || window.innerHeight;
-    const CAM_Z   = IS_MOBILE ? 3.2 : 2.8;
-    const CAM_FOV = IS_MOBILE ? 70  : 54;
+    const CAM_Z   = 2.8;
+    const CAM_FOV = 54;
     camera = new THREE.PerspectiveCamera(CAM_FOV, w / h, 0.1, 100);
     camera.position.set(0, 0.04, CAM_Z);
 
@@ -145,7 +147,10 @@ const BrainScene = (() => {
 
     expandedPositions = new Float32Array(n);
     for (let i = 0; i < n; i += 3) {
-      const scale = 1.6 + Math.random() * 0.65;
+      const scale = IS_MOBILE
+        ? (1.28 + Math.random() * 0.26)
+        : (1.6 + Math.random() * 0.65);
+
       expandedPositions[i]     = rawPts[i]     * scale;
       expandedPositions[i + 1] = rawPts[i + 1] * scale;
       expandedPositions[i + 2] = rawPts[i + 2] * scale;
@@ -157,7 +162,7 @@ const BrainScene = (() => {
     const pMat = new THREE.PointsMaterial({
       color: 0x0a0a0a,
       map: makeCircleTexture(),
-      size: IS_MOBILE ? 0.048 : 0.040,
+      size: IS_MOBILE ? 0.034 : 0.040,
       transparent: true,
       opacity: 0.65,
       sizeAttenuation: true,
@@ -222,13 +227,7 @@ const BrainScene = (() => {
     // ── State machine ────────────────────────────────────────────────────
     let expandT, opacityP, opacityL, scaleVal;
 
-    if (IS_MOBILE) {
-      // Mobile: brain stays visible throughout all panels, gentle expansion only
-      expandT  = sp * 0.4;
-      opacityP = 0.65;
-      opacityL = 0.13;
-      scaleVal = breathe + sp * 0.08;
-    } else if (sp < 0.30) {
+    if (sp < 0.30) {
       expandT  = 0;
       opacityP = 0.65;
       opacityL = 0.13;
@@ -284,7 +283,8 @@ const BrainScene = (() => {
 
     particles.material.opacity    = Math.max(0, opacityP);
     lineSegments.material.opacity = Math.max(0, opacityL);
-    brainGroup.scale.setScalar(Math.max(0.05, scaleVal));
+    const finalScale = IS_MOBILE ? scaleVal * MOBILE_FIT_SCALE : scaleVal;
+    brainGroup.scale.setScalar(Math.max(0.05, finalScale));
 
     renderer.render(scene, camera);
   }
@@ -293,8 +293,11 @@ const BrainScene = (() => {
     targetScroll = Math.min(1, Math.max(0, p));
     const stage  = p < 0.25 ? 0 : p < 0.50 ? 1 : p < 0.75 ? 2 : 3;
     const target = STAGE_TARGETS[stage];
+    // Desktop keeps the original staged movement.
+    // Mobile stays centered and slightly higher so it sits like the desktop composition,
+    // but never moves sideways out of the viewport.
     targetGroupX = IS_MOBILE ? 0 : target.x;
-    targetGroupY = IS_MOBILE ? 0 : target.y;
+    targetGroupY = IS_MOBILE ? MOBILE_Y_OFFSET : target.y;
   }
 
   function onResize() {

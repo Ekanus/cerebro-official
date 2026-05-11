@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // ── Early init — independent of preloader ────────────────────────────────
   const IS_MOBILE_INIT = window.matchMedia('(max-width: 767px)').matches;
-  const brainCanvas = document.getElementById(IS_MOBILE_INIT ? 'mobileBrainCanvas' : 'brainCanvas');
+  const brainCanvas = document.getElementById('brainCanvas');
   if (brainCanvas) BrainScene.init(brainCanvas);
   CustomCursor.init();
 
@@ -113,11 +113,23 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   mm.add('(max-width: 767px)', () => {
-    // Mobile brain scroll is handled by syncBrain below — no override here
+    ScrollTrigger.create({
+      trigger: '#hero',
+      start: 'top top',
+      end: '+=420%',
+      pin: true,
+      pinSpacing: true,
+      onUpdate(self) {
+        const p = self.progress;
+        BrainScene.setScrollProgress(p);
+        const idx = p < 0.26 ? 0 : p < 0.52 ? 1 : p < 0.77 ? 2 : 3;
+        goToScene(idx);
+      },
+    });
   });
 
   // ── Mobile panel reveals + scroll-reactive brain ─────────────────────────
-  if (IS_MOBILE_INIT) {
+  if (false && IS_MOBILE_INIT) {
     const hmPanels = Array.from(document.querySelectorAll('.hm-panel'));
 
     // Hidden initial state for all mobile panel content
@@ -317,28 +329,6 @@ document.addEventListener('DOMContentLoaded', () => {
   // ── Preloader → hero entrance ─────────────────────────────────────────────
   Preloader.run(() => {
     ScrollTrigger.refresh();
-    if (IS_MOBILE_INIT) {
-      const words0 = Array.from(document.querySelectorAll('.hm-panel--0 .hw'));
-      gsap.timeline()
-        .fromTo('.nav',
-          { opacity: 0, y: -24 },
-          { opacity: 1, y: 0, duration: 0.65, ease: 'power3.out' }
-        )
-        .fromTo('.hm-overline',
-          { opacity: 0, y: -8 },
-          { opacity: 1, y: 0, duration: 0.50, ease: 'power3.out' },
-          '-=0.30'
-        )
-        .to(words0,
-          { opacity: 1, y: 0, duration: 0.55, stagger: 0.09, ease: 'power2.out' },
-          '-=0.25'
-        )
-        .to('.hm-meta',
-          { opacity: 0.65, y: 0, duration: 0.40, ease: 'power2.out' },
-          '-=0.18'
-        );
-    } else {
-      runHeroEntrance();
-    }
+    runHeroEntrance();
   });
 });
