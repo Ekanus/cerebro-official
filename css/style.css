@@ -1808,3 +1808,152 @@ input, textarea, select { font-family: inherit; font-size: inherit; }
     margin-top: 0.65rem !important;
   }
 }
+
+/* ══════════════════════════════════════════════════════════
+   REEL OVERLAY
+══════════════════════════════════════════════════════════ */
+
+/* ── Trigger button — sits inside hero scene 3 ───────────── */
+.reel-btn {
+  pointer-events: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-top: 2.4rem;
+  padding: 0.58rem 1.5rem;
+  font-family: var(--ff-body);
+  font-size: 0.62rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--c-muted);
+  background: transparent;
+  border: 1px solid rgba(10, 10, 10, 0.18);
+  border-radius: 2px;
+  cursor: pointer;
+  transition: color 0.24s var(--ease-out),
+              background 0.24s var(--ease-out),
+              border-color 0.24s var(--ease-out);
+  position: relative;
+  z-index: 4;
+}
+
+.reel-btn::before {
+  content: '';
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: currentColor;
+  opacity: 0.55;
+  flex-shrink: 0;
+}
+
+.reel-btn:hover {
+  color: #fff;
+  background: var(--c-text);
+  border-color: var(--c-text);
+}
+
+.reel-btn:focus-visible {
+  outline: 1px solid var(--c-muted-light);
+  outline-offset: 5px;
+}
+
+/* ── Fullscreen overlay ──────────────────────────────────── */
+.reel-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9000;
+  background: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.7s ease;
+}
+.reel-overlay.reel-overlay--open {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.reel-overlay__close {
+  position: absolute;
+  top: 28px;
+  right: 28px;
+  width: 44px;
+  height: 44px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  z-index: 10;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.reel-overlay__close span {
+  position: absolute;
+  width: 22px;
+  height: 1.5px;
+  background: rgba(255,255,255,0.7);
+  transition: background 0.2s;
+}
+.reel-overlay__close span:first-child { transform: rotate(45deg); }
+.reel-overlay__close span:last-child  { transform: rotate(-45deg); }
+.reel-overlay__close:hover span { background: #fff; }
+
+.reel-overlay__video-wrap {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.reel-overlay__video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* ── Lang switcher ───────────────────────────────────────── */
+.lang-switcher {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-left: 0.5rem;
+}
+
+.lang-btn {
+  font-family: var(--ff-body);
+  font-size: 0.60rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  color: var(--c-muted);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.2rem 0.1rem;
+  transition: color 0.2s;
+}
+
+.lang-btn:hover,
+.lang-btn--active {
+  color: var(--c-text);
+}
+
+.lang-sep {
+  color: var(--c-muted-light);
+  font-size: 0.65rem;
+}
+
+/* ── Mobile reel / lang adjustments ─────────────────────── */
+@media (max-width: 767px) {
+  .reel-btn {
+    font-size: 0.60rem;
+    padding: 0.55rem 1.2rem;
+    margin-top: 2rem;
+  }
+  .reel-overlay__close { top: 18px; right: 18px; }
+  .lang-switcher { display: none; }
+}

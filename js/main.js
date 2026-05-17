@@ -266,6 +266,52 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  // ── Reel Overlay ────────────────────────────────────────────────────────
+  const reelBtn     = document.getElementById('reelBtn');
+  const reelOverlay = document.getElementById('reelOverlay');
+  const reelClose   = document.getElementById('reelClose');
+  const reelVideo   = document.getElementById('reelVideo');
+
+  let _savedScrollY = 0;
+
+  function openReel() {
+    _savedScrollY = window.scrollY;
+    reelOverlay.classList.add('reel-overlay--open');
+    document.documentElement.style.overflow = 'hidden';
+    document.body.style.overflow = 'hidden';
+    reelVideo.muted = true;
+    reelVideo.currentTime = 0;
+    reelVideo.controls = false;
+    reelVideo.load();
+    reelVideo.play().catch(() => {});
+    const cursorInner = document.querySelector('.cursor-inner');
+    const cursorOuter = document.querySelector('.cursor-outer');
+    if (cursorInner) cursorInner.style.background = '#fff';
+    if (cursorOuter) cursorOuter.style.borderColor = '#fff';
+  }
+
+  function closeReel() {
+    reelVideo.pause();
+    reelVideo.currentTime = 0;
+    reelOverlay.classList.remove('reel-overlay--open');
+    document.documentElement.style.overflow = '';
+    document.body.style.overflow = '';
+    window.scrollTo({ top: _savedScrollY, behavior: 'instant' });
+    const cursorInner = document.querySelector('.cursor-inner');
+    const cursorOuter = document.querySelector('.cursor-outer');
+    if (cursorInner) cursorInner.style.background = '';
+    if (cursorOuter) cursorOuter.style.borderColor = '';
+  }
+
+  if (reelBtn)   reelBtn.addEventListener('click', openReel);
+  if (reelClose) reelClose.addEventListener('click', closeReel);
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && reelOverlay.classList.contains('reel-overlay--open')) {
+      closeReel();
+    }
+  });
+
   // ── Preloader → hero entrance ─────────────────────────────────────────────
   Preloader.run(() => {
     ScrollTrigger.refresh();
