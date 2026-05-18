@@ -110,6 +110,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   mm.add('(min-width: 768px)', () => {
     ScrollTrigger.create({
+      id: 'heroPin',
       trigger: '#hero',
       start: 'top top',
       end: '+=420%',
@@ -135,6 +136,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   mm.add('(max-width: 767px)', () => {
     ScrollTrigger.create({
+      id: 'heroPin',
       trigger: '#hero',
       start: 'top top',
       end: '+=420%',
@@ -351,18 +353,27 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // ── Preloader → hero entrance ─────────────────────────────────────────────
   Preloader.run(() => {
-    window.scrollTo(0, 0);
-    // Hide all scenes except 0 immediately on load
+    // Hide all scenes immediately
     scenes.forEach((s, i) => {
-      if (i !== 0) {
-        gsap.set(s, { opacity: 0, y: 0 });
-        gsap.set(s.querySelectorAll('.hw'), { opacity: 0, y: 12 });
-      }
+      gsap.set(s, { opacity: 0, y: 0 });
+      gsap.set(s.querySelectorAll('.hw'), { opacity: 0, y: 12 });
     });
-    currentScene = -1; // force goToScene(0) to run
-    setTimeout(() => {
-      ScrollTrigger.refresh();
-      runHeroEntrance();
-    }, 50);
+    currentScene = -1;
+
+    ScrollTrigger.refresh();
+
+    // After refresh, snap to correct scene based on current scroll
+    const heroST = ScrollTrigger.getById('heroPin') || ScrollTrigger.getAll().find(st => st.trigger && st.trigger.id === 'hero');
+    if (heroST) {
+      const p = heroST.progress;
+      const idx = p < 0.26 ? 0 : p < 0.52 ? 1 : p < 0.77 ? 2 : 3;
+      scenes.forEach((s, i) => {
+        gsap.set(s, { opacity: i === idx ? 1 : 0, y: 0 });
+        if (i === idx) gsap.set(s.querySelectorAll('.hw'), { opacity: 1, y: 0 });
+      });
+      currentScene = idx;
+    }
+
+    runHeroEntrance();
   });
 });
