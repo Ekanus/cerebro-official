@@ -1,4 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
+  history.scrollRestoration = 'manual';
+  window.scrollTo(0, 0);
   gsap.registerPlugin(ScrollTrigger);
 
   // ── Early init — independent of preloader ────────────────────────────────
@@ -192,6 +194,13 @@ document.addEventListener('DOMContentLoaded', () => {
       );
     }
   }
+
+  // ── Language switch — refresh ScrollTrigger after layout reflow ──────────
+  document.querySelectorAll('[data-lang-btn]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      setTimeout(() => ScrollTrigger.refresh(), 100);
+    });
+  });
 
   // ── Interactions ─────────────────────────────────────────────────────────
   const menuBtn  = document.getElementById('menuBtn');

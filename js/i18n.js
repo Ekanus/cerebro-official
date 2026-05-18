@@ -26,14 +26,14 @@
       'hero.side.label':      'ΑΥΤΟΜΑΤΙΣΜΟΣ AI · ΨΗΦΙΑΚΕΣ ΛΥΣΕΙΣ · ΛΟΓΙΣΜΙΚΟ',
 
       // Hero — plain text
-      'hero.scene1.eyebrow':  'Automation Intelligence',
+      'hero.scene1.eyebrow':  'Νοημοσύνη Αυτοματισμού',
       'hero.scene1.headline': 'Αυτοματοποιούμε ό,τι σας καθυστερεί.',
       'hero.scene2.sub':      'Κατασκευασμένο στην Κρήτη. Αναπτυγμένο σε όλη την Ελλάδα.',
       'hero.progress.scroll': 'Scroll',
 
       // Hero — HTML (preserves .hw spans for GSAP word-reveal)
       'hero.scene0.headlineHtml': '<span class="hw">Η</span> <span class="hw">νοημοσύνη</span> <span class="hw">πίσω</span> <span class="hw">από</span><br><span class="hw">έξυπνα</span> <span class="hw">συστήματα.</span>',
-      'hero.scene1.headlineHtml': '<span class="hw">Αυτοματοποιούμε</span><br><span class="hw">ό,τι</span> <span class="hw">σας</span><br><span class="hw">καθυστερεί.</span>',
+      'hero.scene1.headlineHtml': '<span class="hw">Αυτοματοποιούμε</span><br><span class="hw">ό,τι σας καθυστερεί.</span>',
       'hero.scene2.headlineHtml': '<span class="hw">Συστήματα</span> <span class="hw">AI</span><br><span class="hw">για</span> <span class="hw">πραγματικές</span><br><span class="hw">επιχειρήσεις.</span>',
       'hero.scene3.headlineHtml': '<span class="hw">CEREBRO</span><br><span class="hw">SOFTWARE.</span>',
 
@@ -83,7 +83,7 @@
       'products.tag.businesses': 'Επιχειρήσεις',
 
       // Method
-      'method.eyebrow':  'Η Μέθοδός μας',
+      'method.eyebrow':  'Η Μέθοδός Μας',
       'method.headline': 'Από το πρόβλημα<br>στο σύστημα.',
       'method.intro':    'Δεν ξεκινάμε από τα εργαλεία. Ξεκινάμε από τα σημεία όπου η επιχείρησή σας χάνει χρόνο, χρήματα ή έλεγχο και δημιουργούμε το σύστημα που κάνει τη λειτουργία σας πιο απλή, γρήγορη και αποδοτική.',
       'method.c1.title': 'Εντοπίζουμε',
@@ -92,6 +92,12 @@
       'method.c2.text':  'Σχεδιάζουμε τη σωστή ροή, το κατάλληλο περιβάλλον και τη λογική αυτοματισμού γύρω από τον τρόπο που λειτουργεί πραγματικά η επιχείρησή σας.',
       'method.c3.title': 'Παραδίδουμε',
       'method.c3.text':  'Παραδίδουμε ένα λειτουργικό σύστημα με υποστήριξη, ενημερώσεις και δυνατότητα εξέλιξης όσο μεγαλώνουν οι ανάγκες σας.',
+      'method.s1.title': 'Εντοπίζουμε',
+      'method.s1.text':  'Εντοπίζουμε τα σημεία καθυστέρησης, τις επαναλαμβανόμενες εργασίες και τα κενά που δυσκολεύουν την καθημερινή λειτουργία σας.',
+      'method.s2.title': 'Σχεδιάζουμε',
+      'method.s2.text':  'Σχεδιάζουμε τη σωστή ροή, το κατάλληλο περιβάλλον και τη λογική αυτοματισμού γύρω από τον τρόπο που λειτουργεί πραγματικά η επιχείρησή σας.',
+      'method.s3.title': 'Παραδίδουμε',
+      'method.s3.text':  'Παραδίδουμε ένα λειτουργικό σύστημα με υποστήριξη, ενημερώσεις και δυνατότητα εξέλιξης όσο μεγαλώνουν οι ανάγκες σας.',
 
       // Why Cerebro
       'why.headline': 'Γιατί\nCerebro;',
@@ -235,14 +241,20 @@
 
       // Method
       'method.eyebrow':  'Our Method',
-      'method.headline': 'From problem<br>to operating system.',
-      'method.intro':    "We don't start with tools. We start by understanding where your business loses time, money, or control — then we build the system that makes your operation simpler, faster, and more efficient.",
+      'method.headline': 'From the problem<br>to the system.',
+      'method.intro':    "We don't start with tools. We start with the points where your business loses time, money or control — and we build the system that makes your operations simpler, faster and more effective.",
       'method.c1.title': 'Diagnose',
       'method.c1.text':  'We identify the bottlenecks, repetitive tasks, and hidden gaps that slow your business down.',
       'method.c2.title': 'Design',
       'method.c2.text':  'We design the right workflow, interface, and automation logic around the way your business actually works.',
       'method.c3.title': 'Deploy',
       'method.c3.text':  'We deliver a working system with support, updates, and the ability to evolve as your needs grow.',
+      'method.s1.title': 'We identify',
+      'method.s1.text':  'We identify the bottlenecks, repetitive tasks, and hidden gaps that slow your business down.',
+      'method.s2.title': 'We design',
+      'method.s2.text':  'We design the right workflow, interface, and automation logic around the way your business actually works.',
+      'method.s3.title': 'We deliver',
+      'method.s3.text':  'We deliver a working system with support, updates, and the ability to evolve as your needs grow.',
 
       // Why Cerebro
       'why.headline': 'Why\nCerebro?',
@@ -324,6 +336,11 @@
     localStorage.setItem(STORAGE_KEY, lang);
     document.documentElement.lang = lang;
     applyTranslations();
+    setTimeout(function() {
+      if (typeof ScrollTrigger !== 'undefined') {
+        ScrollTrigger.refresh();
+      }
+    }, 400);
   }
 
   function t(key) {
@@ -418,9 +435,6 @@
       if (parseFloat(scene.style.opacity) > 0.5) {
         gsap.set(scene.querySelectorAll('.hw'), { opacity: 1, y: 0 });
       }
-    }
-    if (typeof ScrollTrigger !== 'undefined' && ScrollTrigger.refresh) {
-      ScrollTrigger.refresh();
     }
   }
 

@@ -90,7 +90,7 @@
 
     <!-- ── Scene 0: Centered, classical introduction ───────────────────── -->
     <div class="hero-scene hero-scene--0">
-      <h1 class="hero-headline"><span class="hw">The</span> <span class="hw">brain</span> <span class="hw">behind</span> <span class="hw">smart</span><br><span class="hw">systems.</span></h1>
+      <h1 class="hero-headline" data-i18n-html="hero.scene0.headlineHtml"><span class="hw">The</span> <span class="hw">brain</span> <span class="hw">behind</span> <span class="hw">smart</span><br><span class="hw">systems.</span></h1>
       <div class="hero-meta">
         <span data-i18n="hero.meta.location">Heraklion, Crete</span>
         <span aria-hidden="true">·</span>
@@ -101,18 +101,18 @@
     <!-- ── Scene 1: Lower-left, asymmetric, brain shifts right ──────────── -->
     <div class="hero-scene hero-scene--1">
       <p class="hero-scene-eyebrow" data-i18n="hero.scene1.eyebrow">Automation Intelligence</p>
-      <h1 class="hero-headline"><span class="hw">We</span> <span class="hw">automate</span><br><span class="hw">what</span> <span class="hw">slows</span><br><span class="hw">you</span> <span class="hw">down.</span></h1>
+      <h1 class="hero-headline" data-i18n-html="hero.scene1.headlineHtml"><span class="hw">We</span> <span class="hw">automate</span><br><span class="hw">what</span> <span class="hw">slows</span><br><span class="hw">you</span> <span class="hw">down.</span></h1>
     </div>
 
     <!-- ── Scene 2: Wide center, largest headline, brain expands ─────────── -->
     <div class="hero-scene hero-scene--2">
-      <h1 class="hero-headline"><span class="hw">AI</span> <span class="hw">systems</span> <span class="hw">for</span><br><span class="hw">real</span> <span class="hw">businesses.</span></h1>
+      <h1 class="hero-headline" data-i18n-html="hero.scene2.headlineHtml"><span class="hw">AI</span> <span class="hw">systems</span> <span class="hw">for</span><br><span class="hw">real</span> <span class="hw">businesses.</span></h1>
       <p class="hero-scene-sub" data-i18n="hero.scene2.sub">Built in Crete. Deployed across Greece.</p>
     </div>
 
     <!-- ── Scene 3: Brand ending, brain faded ───────────────────────────── -->
     <div class="hero-scene hero-scene--3">
-      <h1 class="hero-headline hero-headline--brand"><span class="hw">CEREBRO</span><br><span class="hw">SOFTWARE.</span></h1>
+      <h1 class="hero-headline hero-headline--brand" data-i18n-html="hero.scene3.headlineHtml"><span class="hw">CEREBRO</span><br><span class="hw">SOFTWARE.</span></h1>
       <p class="hero-scene-url">cerebro.gr</p>
       <button class="reel-btn" id="reelBtn" data-i18n="reel.btn">View the system</button>
     </div>
@@ -215,10 +215,6 @@
             <li data-i18n="products.p1.feat5">Auto-update via GitHub</li>
           </ul>
           <div class="product-footer">
-            <div class="product-pricing">
-              <span class="price-amount">€250–400</span>
-              <span class="price-period" data-i18n="products.p1.period">/year</span>
-            </div>
             <a href="#contact" class="btn btn--outline" data-i18n="products.p1.cta">Request License</a>
           </div>
         </div>
@@ -241,11 +237,6 @@
             <li data-i18n="products.p2.feat5">Weekly reports, multi-inbox, spam filtering</li>
           </ul>
           <div class="product-footer">
-            <div class="product-pricing">
-              <span class="price-amount">€150–200</span>
-              <span class="price-period" data-i18n="products.p2.period">/month</span>
-              <span class="price-note" data-i18n="products.p2.note">API included</span>
-            </div>
             <a href="#contact" class="btn btn--outline" data-i18n="products.p2.cta">Request License</a>
           </div>
         </div>
@@ -255,75 +246,34 @@
   </section>
 
   <!-- ═══════════════════════════════════════════════════════════════════════
-       MEDICAL AUTOMATION
+       METHOD
   ═══════════════════════════════════════════════════════════════════════ -->
-  <section id="medical" class="section section-medical">
+  <section id="method" class="section section-method">
     <div class="container">
       <div class="section-header">
-        <p class="section-eyebrow">Medical Clinics</p>
-        <h2 class="section-headline">AI that works<br>while you treat patients.</h2>
-        <p class="pricing-intro">Four automation tiers. From a booking page to a full 24/7 AI voice agent — choose your level and scale up any time.</p>
+        <p class="section-eyebrow" data-i18n="method.eyebrow">Η Μέθοδός Μας</p>
+        <h2 class="section-headline" data-i18n-html="method.headline">Από το πρόβλημα<br>στο σύστημα.</h2>
+        <p class="section-intro" data-i18n="method.intro">Δεν ξεκινάμε από τα εργαλεία. Ξεκινάμε από τα σημεία όπου η επιχείρησή σας χάνει χρόνο, χρήματα ή έλεγχο και δημιουργούμε το σύστημα που κάνει τη λειτουργία σας πιο απλή, γρήγορη και αποδοτική.</p>
       </div>
 
-      <div class="pricing-grid">
-
-        <div class="pricing-card">
-          <div class="pricing-tier">Starter</div>
-          <div class="pricing-price">
-            <span class="price-main">€40</span><span class="price-per">/mo</span>
-          </div>
-          <div class="pricing-setup">+ €150 setup</div>
-          <ul class="pricing-features">
-            <li>Online booking page</li>
-            <li>Google Business optimization</li>
-          </ul>
-          <a href="#contact" class="btn btn--outline btn--full">Get Started</a>
+      <div class="method-grid">
+        <div class="method-card">
+          <div class="method-number">01</div>
+          <h3 class="method-title" data-i18n="method.s1.title">Εντοπίζουμε</h3>
+          <p class="method-text" data-i18n="method.s1.text">Εντοπίζουμε τα σημεία καθυστέρησης, τις επαναλαμβανόμενες εργασίες και τα κενά που δυσκολεύουν την καθημερινή λειτουργία σας.</p>
         </div>
-
-        <div class="pricing-card">
-          <div class="pricing-tier">Essential</div>
-          <div class="pricing-price">
-            <span class="price-main">€80</span><span class="price-per">/mo</span>
-          </div>
-          <div class="pricing-setup">+ €250 setup</div>
-          <ul class="pricing-features">
-            <li>Online booking page</li>
-            <li>AI Chat Agent 24/7</li>
-            <li>Google Business optimization</li>
-          </ul>
-          <a href="#contact" class="btn btn--outline btn--full">Get Started</a>
+        <div class="method-divider" aria-hidden="true"></div>
+        <div class="method-card">
+          <div class="method-number">02</div>
+          <h3 class="method-title" data-i18n="method.s2.title">Σχεδιάζουμε</h3>
+          <p class="method-text" data-i18n="method.s2.text">Σχεδιάζουμε τη σωστή ροή, το κατάλληλο περιβάλλον και τη λογική αυτοματισμού γύρω από τον τρόπο που λειτουργεί πραγματικά η επιχείρησή σας.</p>
         </div>
-
-        <div class="pricing-card pricing-card--featured">
-          <div class="pricing-badge">Most Popular</div>
-          <div class="pricing-tier">Pro</div>
-          <div class="pricing-price">
-            <span class="price-main">€130</span><span class="price-per">/mo</span>
-          </div>
-          <div class="pricing-setup">+ €500 setup</div>
-          <ul class="pricing-features">
-            <li>Custom clinic website</li>
-            <li>AI Chat Agent 24/7</li>
-            <li>WhatsApp, Messenger, Viber, Instagram</li>
-            <li>Email automation</li>
-          </ul>
-          <a href="#contact" class="btn btn--white btn--full">Get Started</a>
+        <div class="method-divider" aria-hidden="true"></div>
+        <div class="method-card">
+          <div class="method-number">03</div>
+          <h3 class="method-title" data-i18n="method.s3.title">Παραδίδουμε</h3>
+          <p class="method-text" data-i18n="method.s3.text">Παραδίδουμε ένα λειτουργικό σύστημα με υποστήριξη, ενημερώσεις και δυνατότητα εξέλιξης όσο μεγαλώνουν οι ανάγκες σας.</p>
         </div>
-
-        <div class="pricing-card">
-          <div class="pricing-tier">Premium</div>
-          <div class="pricing-price">
-            <span class="price-main">€200</span><span class="price-per">/mo</span>
-          </div>
-          <div class="pricing-setup">+ €500 setup</div>
-          <ul class="pricing-features">
-            <li>Everything in Pro</li>
-            <li>AI Voice Agent 24/7</li>
-            <li>Full automation suite</li>
-          </ul>
-          <a href="#contact" class="btn btn--outline btn--full">Get Started</a>
-        </div>
-
       </div>
     </div>
   </section>
@@ -443,7 +393,6 @@
             <div class="footer-col-label" data-i18n="footer.col1.label">Primary</div>
             <a href="#services" data-i18n="footer.col1.services">Services</a>
             <a href="#products" data-i18n="footer.col1.products">Products</a>
-            <a href="#medical"  data-i18n="footer.col1.medical">Medical Automation</a>
             <a href="#contact"  data-i18n="footer.col1.contact">Contact</a>
           </div>
 
