@@ -207,6 +207,22 @@ document.addEventListener('DOMContentLoaded', () => {
   reveal('.footer-col',            { stagger: 0.09, y: 22 });
   reveal('.footer-credits',        { y: 16 });
 
+  // Method timeline scroll reveal
+  const methodSteps = document.querySelectorAll('.method-step');
+  if (methodSteps.length) {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => {
+            entry.target.classList.add('is-visible');
+          }, Array.from(methodSteps).indexOf(entry.target) * 150);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.2 });
+    methodSteps.forEach(step => observer.observe(step));
+  }
+
   if (!IS_MOBILE_INIT) {
     const wordmark = document.querySelector('.footer-wordmark');
     if (wordmark) {
