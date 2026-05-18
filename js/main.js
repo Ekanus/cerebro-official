@@ -209,13 +209,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Method timeline scroll reveal
   const methodSteps = document.querySelectorAll('.method-step');
-  if (methodSteps.length) {
+  const methodTimeline = document.querySelector('.method-timeline');
+  if (methodSteps.length && methodTimeline) {
     const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry, i) => {
+      entries.forEach(entry => {
         if (entry.isIntersecting) {
+          methodTimeline.classList.add('is-active');
+          const idx = Array.from(methodSteps).indexOf(entry.target);
           setTimeout(() => {
             entry.target.classList.add('is-visible');
-          }, Array.from(methodSteps).indexOf(entry.target) * 150);
+            const dot = entry.target.querySelector('.method-step-dot');
+            if (dot) {
+              dot.classList.add('is-lit');
+              setTimeout(() => dot.classList.remove('is-lit'), 600);
+            }
+          }, idx * 200);
           observer.unobserve(entry.target);
         }
       });
