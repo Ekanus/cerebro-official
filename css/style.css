@@ -1981,7 +1981,7 @@ input, textarea, select { font-family: inherit; font-size: inherit; }
   top: 8px;
   bottom: 8px;
   width: 0.5px;
-  background: rgba(0,0,0,0.12);
+  background: rgba(0,0,0,0.08);
   overflow: hidden;
 }
 
@@ -1989,23 +1989,15 @@ input, textarea, select { font-family: inherit; font-size: inherit; }
   content: '';
   position: absolute;
   left: 0;
-  top: -40px;
+  top: 0;
   width: 100%;
-  height: 40px;
-  background: linear-gradient(to bottom, transparent, #000 50%, transparent);
-  animation: pulse-travel 3s ease-in-out infinite;
-  opacity: 0;
+  height: 0%;
+  background: #000;
+  transition: height 1.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .method-timeline.is-active .method-timeline-line::after {
-  opacity: 1;
-}
-
-@keyframes pulse-travel {
-  0%   { top: -40px; opacity: 0; }
-  10%  { opacity: 0.6; }
-  90%  { opacity: 0.6; }
-  100% { top: 100%; opacity: 0; }
+  height: 100%;
 }
 
 .method-step {
