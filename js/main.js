@@ -353,27 +353,32 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // ── Preloader → hero entrance ─────────────────────────────────────────────
   Preloader.run(() => {
-    // Hide all scenes immediately
+    ScrollTrigger.refresh();
+
+    const heroST = ScrollTrigger.getById('heroPin');
+    const p = heroST ? heroST.progress : 0;
+    const idx = p < 0.26 ? 0 : p < 0.52 ? 1 : p < 0.77 ? 2 : 3;
+
+    // Set all scenes to correct state BEFORE any animation
     scenes.forEach((s, i) => {
       gsap.set(s, { opacity: 0, y: 0 });
       gsap.set(s.querySelectorAll('.hw'), { opacity: 0, y: 12 });
     });
     currentScene = -1;
 
-    ScrollTrigger.refresh();
-
-    // After refresh, snap to correct scene based on current scroll
-    const heroST = ScrollTrigger.getById('heroPin') || ScrollTrigger.getAll().find(st => st.trigger && st.trigger.id === 'hero');
-    if (heroST) {
-      const p = heroST.progress;
-      const idx = p < 0.26 ? 0 : p < 0.52 ? 1 : p < 0.77 ? 2 : 3;
-      scenes.forEach((s, i) => {
-        gsap.set(s, { opacity: i === idx ? 1 : 0, y: 0 });
-        if (i === idx) gsap.set(s.querySelectorAll('.hw'), { opacity: 1, y: 0 });
-      });
+    if (idx === 0) {
+      // Normal first-visit entrance
+      runHeroEntrance();
+    } else {
+      // Refreshed mid-scroll: show correct scene immediately, no animation
+      gsap.set(scenes[idx], { opacity: 1, y: 0 });
+      gsap.set(scenes[idx].querySelectorAll('.hw'), { opacity: 1, y: 0 });
       currentScene = idx;
+      // Still animate nav in
+      gsap.fromTo('.nav',
+        { opacity: 0, y: -24 },
+        { opacity: 1, y: 0, duration: 0.65, ease: 'power3.out' }
+      );
     }
-
-    runHeroEntrance();
   });
 });
