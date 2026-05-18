@@ -15,7 +15,17 @@ document.addEventListener('DOMContentLoaded', () => {
   let currentScene   = 0;
 
   function goToScene(idx) {
-    if (idx === currentScene || idx < 0 || idx >= scenes.length) return;
+    if (idx < 0 || idx >= scenes.length) return;
+    if (idx === currentScene) {
+      // Even if same scene, ensure all others are hidden
+      scenes.forEach((s, i) => {
+        if (i !== idx) {
+          gsap.set(s, { opacity: 0, y: 0 });
+          gsap.set(s.querySelectorAll('.hw'), { opacity: 0, y: 12 });
+        }
+      });
+      return;
+    }
     const prev = scenes[currentScene];
     const next = scenes[idx];
     currentScene = idx;
@@ -111,6 +121,15 @@ document.addEventListener('DOMContentLoaded', () => {
         const idx = p < 0.26 ? 0 : p < 0.52 ? 1 : p < 0.77 ? 2 : 3;
         goToScene(idx);
       },
+      onRefresh(self) {
+        const p = self.progress;
+        const idx = p < 0.26 ? 0 : p < 0.52 ? 1 : p < 0.77 ? 2 : 3;
+        scenes.forEach((s, i) => {
+          if (i !== idx) gsap.set(s, { opacity: 0, y: 0 });
+        });
+        if (scenes[idx]) gsap.set(scenes[idx], { opacity: 1, y: 0 });
+        currentScene = idx;
+      },
     });
   });
 
@@ -126,6 +145,15 @@ document.addEventListener('DOMContentLoaded', () => {
         BrainScene.setScrollProgress(p);
         const idx = p < 0.26 ? 0 : p < 0.52 ? 1 : p < 0.77 ? 2 : 3;
         goToScene(idx);
+      },
+      onRefresh(self) {
+        const p = self.progress;
+        const idx = p < 0.26 ? 0 : p < 0.52 ? 1 : p < 0.77 ? 2 : 3;
+        scenes.forEach((s, i) => {
+          if (i !== idx) gsap.set(s, { opacity: 0, y: 0 });
+        });
+        if (scenes[idx]) gsap.set(scenes[idx], { opacity: 1, y: 0 });
+        currentScene = idx;
       },
     });
   });
@@ -323,7 +351,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // ── Preloader → hero entrance ─────────────────────────────────────────────
   Preloader.run(() => {
-    ScrollTrigger.refresh();
-    runHeroEntrance();
+    window.scrollTo(0, 0);
+    // Hide all scenes except 0 immediately on load
+    scenes.forEach((s, i) => {
+      if (i !== 0) {
+        gsap.set(s, { opacity: 0, y: 0 });
+        gsap.set(s.querySelectorAll('.hw'), { opacity: 0, y: 12 });
+      }
+    });
+    currentScene = -1; // force goToScene(0) to run
+    setTimeout(() => {
+      ScrollTrigger.refresh();
+      runHeroEntrance();
+    }, 50);
   });
 });
