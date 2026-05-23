@@ -292,7 +292,12 @@
   <section class="section section-why">
     <div class="container">
       <div class="why-layout">
-        <h2 class="why-headline" data-i18n-html="why.headline">Why<br>Cerebro?</h2>
+        <div class="why-left">
+          <h2 class="why-headline" data-i18n-html="why.headline">Why<br>Cerebro?</h2>
+          <div class="why-typewriter" aria-hidden="true">
+            <span class="why-typewriter__text"></span><span class="why-typewriter__cursor">_</span>
+          </div>
+        </div>
         <div class="why-grid">
           <div class="why-item">
             <div class="why-number">01</div>
@@ -328,7 +333,10 @@
 
         <div class="contact-info">
           <p class="contact-eyebrow section-eyebrow" data-i18n="contact.eyebrow">Get in touch</p>
-          <h2 class="contact-headline" data-i18n-html="contact.headline">Let's build<br>something intelligent.</h2>
+          <h2 class="contact-headline">
+            <span data-i18n="contact.headline.line1">Ας μιλήσουμε για</span><br>
+            <span data-i18n="contact.headline.line2">κάτι</span> <span class="contact-swap"><span class="contact-swap__text"></span></span>
+          </h2>
           <p class="contact-intro" data-i18n="contact.intro">Tell us about your business and the problem you want to solve. We'll respond within 24 hours.</p>
           <div class="contact-direct">
             <a href="mailto:info@cerebro.gr"

@@ -16,6 +16,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function goToScene(idx) {
     if (idx < 0 || idx >= scenes.length) return;
+    if (currentScene < 0 || !scenes[currentScene]) {
+      currentScene = idx;
+      gsap.set(scenes[idx], { opacity: 1, y: 0 });
+      gsap.set(scenes[idx].querySelectorAll('.hw'), { opacity: 1, y: 0 });
+      return;
+    }
     if (idx === currentScene) {
       // Even if same scene, ensure all others are hidden
       scenes.forEach((s, i) => {
@@ -210,11 +216,21 @@ document.addEventListener('DOMContentLoaded', () => {
   // Method timeline scroll reveal
   const methodSteps = document.querySelectorAll('.method-step');
   const methodTimeline = document.querySelector('.method-timeline');
-  if (methodSteps.length && methodTimeline) {
+  const methodLine = document.querySelector('.method-timeline-line');
+  if (methodSteps.length && methodTimeline && methodLine) {
+    ScrollTrigger.create({
+      trigger: methodTimeline,
+      start: 'top 80%',
+      end: 'bottom 20%',
+      onUpdate(self) {
+        const lineAfter = methodLine.querySelector('::after');
+        methodLine.style.setProperty('--line-progress', self.progress);
+      },
+    });
+
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
-          methodTimeline.classList.add('is-active');
           const idx = Array.from(methodSteps).indexOf(entry.target);
           setTimeout(() => {
             entry.target.classList.add('is-visible');
@@ -276,7 +292,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   document.querySelectorAll('a[href^="#"]').forEach(a => {
     a.addEventListener('click', e => {
-      const target = document.querySelector(a.getAttribute('href'));
+      const href = a.getAttribute('href');
+      if (!href || href === '#') return;
+      const target = document.querySelector(href);
       if (!target) return;
       e.preventDefault();
       target.scrollIntoView({ behavior: 'smooth' });
@@ -374,6 +392,174 @@ document.addEventListener('DOMContentLoaded', () => {
       closeReel();
     }
   });
+
+  // ── Why Cerebro — typewriter animation ──────────────────────────────────
+  const typewriterEl = document.querySelector('.why-typewriter__text');
+  if (typewriterEl) {
+    const phraseKeys = [
+      'why.typewriter.1',
+      'why.typewriter.2',
+      'why.typewriter.3',
+      'why.typewriter.4',
+    ];
+
+    let phraseIdx  = 0;
+    let charIdx    = 0;
+    let isDeleting = false;
+    let isPaused   = false;
+    let typeTimer  = null;
+
+    const TYPE_SPEED   = 38;
+    const DELETE_SPEED = 18;
+    const PAUSE_AFTER  = 2200;
+    const PAUSE_BEFORE = 400;
+
+    function getPhrases() {
+      const i18n = window.CerebroI18n || window.i18n;
+      return phraseKeys.map(k => (i18n && i18n.t ? i18n.t(k) : k));
+    }
+
+    function typeLoop() {
+      const phrases = getPhrases();
+      const current = phrases[phraseIdx];
+
+      if (!isDeleting) {
+        charIdx++;
+        typewriterEl.textContent = current.slice(0, charIdx);
+        if (charIdx === current.length) {
+          if (isPaused) return;
+          isPaused = true;
+          setTimeout(() => {
+            isPaused   = false;
+            isDeleting = true;
+            typeTimer = setTimeout(typeLoop, PAUSE_BEFORE);
+          }, PAUSE_AFTER);
+          return;
+        }
+      } else {
+        charIdx--;
+        typewriterEl.textContent = current.slice(0, charIdx);
+        if (charIdx === 0) {
+          isDeleting = false;
+          phraseIdx  = (phraseIdx + 1) % phrases.length;
+        }
+      }
+
+      typeTimer = setTimeout(typeLoop, isDeleting ? DELETE_SPEED : TYPE_SPEED);
+    }
+
+    function resetTypewriter() {
+      clearTimeout(typeTimer);
+      charIdx    = 0;
+      phraseIdx  = 0;
+      isDeleting = false;
+      isPaused   = false;
+      typewriterEl.textContent = '';
+      setTimeout(typeLoop, 300);
+    }
+
+    // Start when why section enters viewport
+    const whySection = document.querySelector('.section-why');
+    if (whySection) {
+      const whyObserver = new IntersectionObserver((entries) => {
+        if (entries[0].isIntersecting) {
+          setTimeout(typeLoop, 600);
+          whyObserver.disconnect();
+        }
+      }, { threshold: 0.3 });
+      whyObserver.observe(whySection);
+    }
+
+    // Reset and restart on language switch
+    document.querySelectorAll('[data-lang-btn]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        setTimeout(resetTypewriter, 150);
+      });
+    });
+  }
+
+  // ── Contact headline — vertical slide word swap ──────────────────────────
+  const contactSwapEl = document.querySelector('.contact-swap__text');
+  if (contactSwapEl) {
+    const swapKeys = [
+      'contact.swap.1',
+      'contact.swap.2',
+      'contact.swap.3',
+      'contact.swap.4',
+    ];
+
+    let swapIdx = 0;
+    let swapTimer = null;
+
+    function getSwapWords() {
+      const i18n = window.CerebroI18n || window.i18n;
+      return swapKeys.map(k => (i18n && i18n.t ? i18n.t(k) : k));
+    }
+
+    function swapWord() {
+      const words = getSwapWords();
+      const next  = words[swapIdx];
+
+      // Exit current word downward
+      contactSwapEl.classList.add('swap-exit');
+
+      setTimeout(() => {
+        // Snap new word above (invisible)
+        contactSwapEl.textContent = next;
+        contactSwapEl.classList.remove('swap-exit');
+        contactSwapEl.classList.add('swap-enter-from');
+
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => {
+            // Slide new word into place
+            contactSwapEl.classList.remove('swap-enter-from');
+            contactSwapEl.classList.add('swap-enter-active');
+          });
+        });
+
+        setTimeout(() => {
+          contactSwapEl.classList.remove('swap-enter-active');
+          swapIdx = (swapIdx + 1) % words.length;
+        }, 1300);
+
+      }, 900);
+    }
+
+    function resetSwap() {
+      clearTimeout(swapTimer);
+      swapIdx = 0;
+      const words = getSwapWords();
+      contactSwapEl.textContent = words[0];
+      contactSwapEl.className = 'contact-swap__text';
+      swapIdx = 1;
+      swapTimer = setInterval(swapWord, 4000);
+    }
+
+    // Set correct first word immediately based on current language
+    const words = getSwapWords();
+    contactSwapEl.textContent = words[0];
+    swapIdx = 1;
+
+    // Start interval when contact section enters viewport
+    const contactSection = document.querySelector('#contact');
+    if (contactSection) {
+      const contactObserver = new IntersectionObserver((entries) => {
+        if (entries[0].isIntersecting) {
+          swapTimer = setInterval(swapWord, 4000);
+          contactObserver.disconnect();
+        }
+      }, { threshold: 0.3 });
+      contactObserver.observe(contactSection);
+    }
+
+    // Reset on language switch
+    document.querySelectorAll('[data-lang-btn]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        clearInterval(swapTimer);
+        setTimeout(resetSwap, 200);
+      });
+    });
+  }
 
   // ── Preloader → hero entrance ─────────────────────────────────────────────
   Preloader.run(() => {

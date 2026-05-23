@@ -109,10 +109,20 @@
       'why.i3.text':  'Παραδίδουμε συστήματα έτοιμα για παραγωγή, όχι demos. Ο αυτοματισμός σας λειτουργεί από την πρώτη μέρα, με αδειοδότηση, ενημερώσεις και υποστήριξη.',
       'why.i4.title': 'Διαφανής τιμολόγηση.',
       'why.i4.text':  'Χωρίς κρυφές χρεώσεις. Σαφή πακέτα με εκ των προτέρων κόστη, μηνιαίες τιμές και τα πάντα τεκμηριωμένα πριν υπογράψετε οτιδήποτε.',
+      'why.typewriter.1': 'Επειδή δεν πουλάμε templates.',
+      'why.typewriter.2': 'Επειδή το AI που φτιάχνουμε δουλεύει.',
+      'why.typewriter.3': 'Επειδή μετράμε αποτελέσματα, όχι ώρες.',
+      'why.typewriter.4': 'Επειδή automation δεν σημαίνει απλοποίηση — σημαίνει ακρίβεια.',
+
+      'contact.swap.1': 'ευφυές.',
+      'contact.swap.2': 'αποδοτικό.',
+      'contact.swap.3': 'ακριβές.',
+      'contact.swap.4': 'δικό σας.',
 
       // Contact
       'contact.eyebrow': 'Επικοινωνήστε μαζί μας',
-      'contact.headline': 'Ας χτίσουμε\nκάτι ευφυές.',
+      'contact.headline.line1': 'Ας μιλήσουμε για',
+      'contact.headline.line2': 'κάτι',
       'contact.intro':    'Πείτε μας για την επιχείρησή σας και το πρόβλημα που θέλετε να λύσετε. Θα απαντήσουμε εντός 24 ωρών.',
       'contact.hint':     'Κάντε κλικ για αντιγραφή',
 
@@ -266,10 +276,20 @@
       'why.i3.text':  'We deploy production-ready systems, not demos. Your automation is operational from day one, with licensing, updates, and support included.',
       'why.i4.title': 'Transparent pricing.',
       'why.i4.text':  'No hidden fees. Clear packages with upfront costs, monthly rates, and everything documented before you sign anything.',
+      'why.typewriter.1': 'Because we don\'t sell templates.',
+      'why.typewriter.2': 'Because the AI we build actually works.',
+      'why.typewriter.3': 'Because we measure results, not hours.',
+      'why.typewriter.4': 'Because automation doesn\'t mean simplification — it means precision.',
+
+      'contact.swap.1': 'intelligent.',
+      'contact.swap.2': 'efficient.',
+      'contact.swap.3': 'precise.',
+      'contact.swap.4': 'yours.',
 
       // Contact
       'contact.eyebrow':  'Get in touch',
-      'contact.headline': "Let's build\nsomething intelligent.",
+      'contact.headline.line1': 'Let\'s talk about',
+      'contact.headline.line2': 'something',
       'contact.intro':    "Tell us about your business and the problem you want to solve. We'll respond within 24 hours.",
       'contact.hint':     'Click to copy',
 
@@ -297,7 +317,7 @@
       'reel.replay': 'Replay',
 
       // Footer
-      'footer.statement':     "Let's build the system\nyour business is missing.",
+      'footer.statement':     "Let's build the system<br>your business is missing.",
       'footer.col1.label':    'Primary',
       'footer.col1.services': 'Services',
       'footer.col1.products': 'Products',

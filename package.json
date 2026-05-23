@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "@google/genai": "^2.3.0",
     "resend": "^3.0.0"
   }
 }
